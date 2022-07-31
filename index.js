@@ -27,14 +27,16 @@ app.use('/api/v1', router)
 app.use('/api/v1', public)
 
 //
+const port = process.env.PORT || 5000
 mongoose.connect("mongodb+srv://MAUCES:MAUCES@cluster0.bwdex.mongodb.net/?retryWrites=true&w=majority")
 .then(() =>{
-    app.listen(5000, () => {
+    app.listen(port, () => {
         console.log("Database is initializing  from mongodb cloud..")
         console.log("Server is initializing  to port 500...")
     })
 }).catch((err) =>{
     console.log("ERROR CONNECTING TO THE SERVER :" + err)
 })
+
 
 
