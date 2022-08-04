@@ -8,7 +8,7 @@ router.get('/public', viewed)
 router.get('/public/:department', filtered )
 router.put('/public/:id', edited)
 router.delete('/public/:id', deleted)
-router.get('/public/:id', single)
+router.get('/public/single/:id', single)
 
 
 module.exports = router
