@@ -44,9 +44,9 @@ const edited = (req, res) =>{
     const { id } = req.params;
     const { title, description, department, school} = req.body;
     publicResource.findOneAndUpdate({_id:id }, { title, description, department, school},{new: true})
-    .exec((err,publicResource) => {
+    .exec((err,publicResourcex) => {
         if(err) console.log(err)
-        res.json(publicResource)
+        res.json(publicResourcex)
     })
 }
 //////////////////?????? DELETED ???????/////////////////////////////////
