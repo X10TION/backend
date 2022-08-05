@@ -43,7 +43,11 @@ const single = (req, res) => {
 const edited = (req, res) =>{
     const { id } = req.params;
     const { title, description, department, school} = req.body;
-    publicResource.findOneAndUpdate({_id:id }, { title, description, department, school},{new: true})
+    const attach = req.file.path
+//     if(req.file){
+//         publicResource.attach = req.file.path
+//         {
+    publicResource.findOneAndUpdate({_id:id }, { title, description, department, school,attach},{new: true})
     .exec((err,publicResourcex) => {
         if(err) console.log(err)
         res.json(publicResourcex)
