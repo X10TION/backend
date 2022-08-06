@@ -24,7 +24,7 @@ const created = async (req,res) =>{
 }
 /////////////////////////???? VIEW RESOURCE ?????///////////////////////////////////
 const viewed = (req,res) =>{
-    publicResource.find().populate('createdBy','fullname department profilePicture').sort({createAt: 1}).exec((err, posts) =>{
+    publicResource.find().populate('createdBy','fullname department').sort({createAt: 1}).exec((err, posts) =>{
         if(err) console.log(err);
         res.json(posts)
     })
@@ -43,11 +43,12 @@ const single = (req, res) => {
 const edited = (req, res) =>{
     const { id } = req.params;
     const { title, description, department, school} = req.body;
-    const attach = req.file.path
+//     const attach = req.file.path
 //     if(req.file){
 //         publicResource.attach = req.file.path
 //         {
-    publicResource.findOneAndUpdate({_id:id }, { title, description, department, school,attach},{new: true})
+    // INSERT THE CLOUDINARY FILE HERE
+    publicResource.findOneAndUpdate({_id:id }, { title, description, department, school},{new: true})
     .exec((err,publicResourcex) => {
         if(err) console.log(err)
         res.json(publicResourcex)
