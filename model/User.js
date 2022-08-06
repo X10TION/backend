@@ -19,7 +19,7 @@ const userSchema = new Schema({
     },
     accounttype:{
         type: String,
-        require: true
+//         require: true
 //         default:"publice"
     },
     email:{
