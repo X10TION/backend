@@ -8,6 +8,8 @@ const publicSchema = new Schema({
     school: String,
     description: String,
     attach:String,
+    cloudinary_id:{type:String},
+    format:{type:String}
     createdBy:{type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     
 },{
