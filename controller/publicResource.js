@@ -1,4 +1,5 @@
 const publicResource =  require('../model/public')
+const cloudinary = require('../middleware/cloudinary')
 //////////////////// ???SINGLE??? ////////////////////////////
 const created = async (req,res) =>{
     const {title, department, school, description, createdBy } = req.body
