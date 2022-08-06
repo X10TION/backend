@@ -3,17 +3,19 @@ const cloudinary = require('../middleware/cloudinary')
 //////////////////// ???SINGLE??? ////////////////////////////
 const created = async (req,res) =>{
     const {title, department, school, description, createdBy } = req.body
+     try{
+    const result = await cloudinary.uploader.upload(req.file.path)
     const publicArea = new publicResource({
         title, 
         department,
         school,
         description,
-        createdBy,        
+        createdBy, 
+          avater:result.secure_url,
+            cloudinary_id:result.public_id,
+            format:result.format
     })
-    if(req.file){
-        publicArea.attach = req.file.path
-    }
-    try{
+   
         await publicArea.save()
     }catch(err){
         console.log(err)
