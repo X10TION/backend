@@ -1,19 +1,14 @@
-const express = require('express')
-const path = require('path')
 const multer = require('multer')
+const path = require('path')
 
-var filestorageEngine = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null,'./uploads')
-    },
-    filename:(req,file, cb) => {
-        cb(null,"[mauces]-" + Date.now() + file.originalname)
+module.exports = multer({
+    storage: multer.diskStorage({}),
+    fileFilter: (req, file, cb) => {
+        let ext = path.extname(file.originalname)
+        if(ext !== ".jpg" && ext !== ".jpeg" && ext !== ".png" && ext !== ".pdf"){
+            cb(new Error("file not supported"), false)
+            return
+        }
+        cb(null, true)
     }
 })
-
-var upload = multer({
-    storage:filestorageEngine
-})
-
-module.exports = upload
-
