@@ -1,29 +1,27 @@
 const publicResource =  require('../model/public')
 const cloudinary = require('../middleware/cloudinary')
+const upload = require('../middleware/fileUpload')
 //////////////////// ???SINGLE??? ////////////////////////////
 const created = async (req,res) =>{
-    const {title, department, school, description, createdBy } = req.body
+    // const {title, department, school, description, createdBy } = req.body   
      try{
-    const result = await cloudinary.uploader.upload(req.file.path)
-    const publicArea = new publicResource({
-        title, 
-        department,
-        school,
-        description,
-        createdBy, 
-          avater:result.secure_url,
+        const result = await cloudinary.uploader.upload(req.file.path)
+            // res.json(result)
+            // console.log(result)
+    let user =  publicResource({
+            title:req.body.title,
+            department:req.body.department,
+            school:req.body.school,
+            description:req.body.description,
+            createdBy:req.body.createdBy,
+            attach:result.secure_url,
             cloudinary_id:result.public_id,
             format:result.format
-    })
-   
-        await publicArea.save()
+        })
+        await user.save()
+        res.status(201).json(user)
     }catch(err){
-        console.log(err)
-    }
-    return res.status(201).json({
-        msg:"Congratulation.. Thank you for your contribution",
-        publicArea
-    })
+        console.log("my error here" + err)}
 }
 /////////////////////////???? VIEW RESOURCE ?????///////////////////////////////////
 const viewed = (req,res) =>{
